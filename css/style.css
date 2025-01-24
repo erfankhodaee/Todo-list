@@ -66,6 +66,25 @@ p {
   border-radius: 0.7rem;
 }
 
+.input__container {
+  display: flex;
+  align-items: center;
+  width: ;
+}
+
+.task-input {
+  width: 100%;
+}
+
+.task-input input {
+  outline: 0;
+  border: 0;
+  padding: 1rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  width: 30rem;
+}
+
 @media screen and (max-width: 768px) {
   .input {
     flex-direction: column;
@@ -79,28 +98,11 @@ p {
   button.add-button {
     display: none;
   }
-  button.date-button{
+  button.date-button {
     padding-left: 3rem;
     padding-right: 3rem;
     font-size: 1.8rem;
   }
-}
-
-.input__container {
-  display: flex;
-  align-items: center;
-}
-
-.task-input {
-  width: 100%;
-}
-
-.task-input input {
-  outline: 0;
-  border: 0;
-  padding: 1rem 1rem;
-  border-radius: 0.5rem;
-  font-size: 1.6rem;
 }
 
 .add-logo {
