@@ -1,1 +1,22 @@
-// ui = custom; // sibebar lazem nist// new todo character > 3// entekhab kone task ro key anjam bede// button delete, edit baraye har task, az jomle esm// button cancel kardan e edit// right click lazem nist// list e completed ham darim// button haye bala lazem nist, be jash sort by date,sort by alphabet// input date va sumbit va place holder dashte bashe// search baraye peyda kardan task ha// key e Enter va Esc to input kar kone// add shodan va compelete shodan task sound effect dashte bashan
+const inputBox = document.querySelector(".input-box");
+const addButton = document.querySelector(".add-button");
+const dateButton = document.querySelector(".date-button");
+const taskList = document.querySelector(".task-list");
+
+addButton.addEventListener("click", (e) => {
+  if (inputBox.value.length < 3) {
+    alert("you need to atleast enter 3 characters!");
+    return;
+  }
+  const newTask = document.createElement("li");
+  newTask.className = "task-li";
+  const deleteBtn = document.createElement("button");
+  deleteBtn.classList = "delete-button btn";
+  deleteBtn.innerText = "Delete";
+  newTask.innerText = inputBox.value;
+  taskList.appendChild(newTask);
+  newTask.appendChild(deleteBtn);
+  deleteBtn.addEventListener("click", () => {
+    newTask.remove();
+  });
+});
