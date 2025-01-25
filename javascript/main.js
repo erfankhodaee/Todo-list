@@ -4,16 +4,19 @@ const dateButton = document.querySelector(".date-button");
 const taskList = document.querySelector(".task-list");
 
 addButton.addEventListener("click", (e) => {
- addOrDelete()
+  addOrDelete();
+  inputBox.value = "";
 });
 
-inputBox.addEventListener("keypress" ,(e)=>{
-  if(e.key === "Enter"){
-    addOrDelete()
+inputBox.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    addOrDelete();
+    inputBox.value = "";
   }
-})
+  
+});
 
-function addOrDelete(){
+function addOrDelete() {
   if (inputBox.value.length < 3) {
     alert("you need to atleast enter 3 characters!");
     return;
@@ -30,3 +33,8 @@ function addOrDelete(){
     newTask.remove();
   });
 }
+
+const searchBox = document.querySelector(".search-box");
+const searchLogo = document.querySelector(".search-logo");
+
+
