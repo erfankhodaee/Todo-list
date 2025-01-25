@@ -174,10 +174,37 @@ p {
   margin: 1rem auto;
 }
 
-
-button.delete-button{
+button.delete-button {
   font-size: 1.2rem;
-  padding: .6rem 1rem;
+  padding: 0.6rem 1rem;
   width: auto;
   height: auto;
+}
+
+.search-container {
+  margin: 0 auto 4rem;
+  display: block;
+  width: 60%;
+  min-width: 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: #f1f1f1;
+  border-radius: 0.7rem;
+  padding: 1rem 1.5rem;
+}
+
+.search-container i {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.search-box {
+  font-size: 1.4rem;
+  width: 100%;
+  min-width: 20rem;
+  outline: 0;
+  border: 0;
+  background-color: transparent;
 }
