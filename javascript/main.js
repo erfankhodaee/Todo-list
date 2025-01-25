@@ -4,6 +4,16 @@ const dateButton = document.querySelector(".date-button");
 const taskList = document.querySelector(".task-list");
 
 addButton.addEventListener("click", (e) => {
+ addOrDelete()
+});
+
+inputBox.addEventListener("keypress" ,(e)=>{
+  if(e.key === "Enter"){
+    addOrDelete()
+  }
+})
+
+function addOrDelete(){
   if (inputBox.value.length < 3) {
     alert("you need to atleast enter 3 characters!");
     return;
@@ -19,4 +29,4 @@ addButton.addEventListener("click", (e) => {
   deleteBtn.addEventListener("click", () => {
     newTask.remove();
   });
-});
+}
