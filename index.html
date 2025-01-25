@@ -10,21 +10,23 @@
       src="https://kit.fontawesome.com/5aea15c056.js"
       crossorigin="anonymous"
     ></script>
-    <script src="/javascript/main.js"></script>
+    <script src="/javascript/main.js" defer></script>
   </head>
   <body>
     <div class="container">
       <h1 class="container__heading">My Tasks</h1>
+
       <div class="input">
         <div class="input__container">
-          <div class="add-logo"><i class="fa-solid fa-plus"></i></div>
-          <div class="task-input"><input type="text" name="text" /></div>
+          <input type="text" name="text" class="input-box" />
         </div>
         <div class="button-container">
           <button class="add-button btn">Add Task</button>
           <button class="date-button btn">Add Date</button>
         </div>
       </div>
+
+      <ul class="taksk"></ul>
     </div>
   </body>
 </html>
