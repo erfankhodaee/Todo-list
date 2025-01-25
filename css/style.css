@@ -54,10 +54,12 @@ p {
   padding: 2rem;
   margin: 12rem auto;
   width: 90%;
+  max-width: 100.24rem;
 }
 
 .container__heading {
   text-align: center;
+  margin-bottom: 6rem;
 }
 
 .input {
