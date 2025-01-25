@@ -24,6 +24,12 @@ body {
   background-color: var(--silver-lake-blue);
 }
 
+ul li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 h1 {
   font-size: 5.61rem;
 }
@@ -145,4 +151,31 @@ p {
 .btn:active {
   box-shadow: none;
   transform: translateY(0);
+}
+
+.task-list {
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0;
+  width: calc(100% - 4rem);
+}
+
+.task-li {
+  background-color: #e5e5e5;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  margin: 1rem auto;
+}
+
+
+button.delete-button{
+  font-size: 1.2rem;
+  padding: .6rem 1rem;
+  width: auto;
+  height: auto;
 }
