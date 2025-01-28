@@ -4,15 +4,17 @@ const dateButton = document.querySelector(".date-button");
 const taskList = document.querySelector(".task-list");
 const searchBox = document.querySelector(".search-box");
 
+const todoList = [];
 class Todo {
   constructor(title, date) {
     this.title = title;
-    this.date = date;
+    this.date = document.createElement("span");
+    this.date.innerText = date;
   }
 
   checkTitle() {
     if (this.title.length < 3) {
-      alert("Enter at least 3 characters!");
+      alert("enter at least 3 characters!");
       return false;
     }
     return true;
@@ -23,9 +25,14 @@ class Todo {
       this.li = document.createElement("li");
       this.li.className = "task-li";
       this.li.innerText = this.title;
+      inputBox.value = "";
       taskList.appendChild(this.li);
+
+      this.li.appendChild(this.date);
       // adding delete button to li
       this.createDeleteButton();
+      this.createCheckBox();
+      todoList.push({ element: this.li });
     }
   }
 
@@ -33,14 +40,39 @@ class Todo {
     this.deleteButton = document.createElement("button");
     this.deleteButton.className = "btn delete-button";
     this.deleteButton.textContent = "Delete";
-    this.deleteButton.addEventListener("click",()=>{
-      this.li.remove()
-    })
+    this.deleteButton.addEventListener("click", () => {
+      this.li.remove();
+    });
     this.li.appendChild(this.deleteButton);
+  }
+  createCheckBox() {
+    this.checkbox = document.createElement("input");
+    this.checkbox.type = "checkbox";
+    this.checkbox.className = "task-checkbox";
+    this.checkbox.addEventListener("change", () => {
+      if (this.checkbox.checked) {
+        this.li.style.color = "gray";
+      } else {
+        this.li.style.color = "black";
+      }
+    });
+    // putting checkbox before li title
+    this.li.insertBefore(this.checkbox, this.li.firstChild);
   }
 }
 
 addButton.addEventListener("click", () => {
   new Todo(inputBox.value, dateButton.value).addTask();
   // using Todo without assigning it to a new obj
+});
+
+searchBox.addEventListener("input", (e) => {
+  const searchQuery = e.target.value;
+  todoList.forEach((item) => {
+    if (item.element.innerText.includes(searchQuery)) {
+      item.element.style.display = "";
+    } else {
+      item.element.style.display = "none";
+    }
+  });
 });
