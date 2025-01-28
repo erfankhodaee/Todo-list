@@ -44,6 +44,7 @@ class Todo {
     this.deleteButton.textContent = "Delete";
     this.deleteButton.addEventListener("click", () => {
       this.li.remove();
+      todoList.splice(todoList.findIndex(item => item.element === this.li), 1);
     });
     this.li.appendChild(this.deleteButton);
   }
@@ -77,7 +78,12 @@ inputBox.addEventListener("keydown", (e) => {
 searchBox.addEventListener("input", (e) => {
   const searchQuery = e.target.value;
   todoList.forEach((item) => {
-    if (item.element.innerText.replace("Delete", "").toLowerCase().includes(searchQuery.toLowerCase())) {
+    if (
+      item.element.innerText
+        .replace("Delete", "")
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
+    ) {
       item.element.style.display = "";
     } else {
       item.element.style.display = "none";
