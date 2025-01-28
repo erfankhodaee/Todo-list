@@ -3,6 +3,8 @@ const addButton = document.querySelector(".add-button");
 const dateButton = document.querySelector(".date-button");
 const taskList = document.querySelector(".task-list");
 const searchBox = document.querySelector(".search-box");
+const sortByNameButton = document.querySelector(".sort-name");
+const sortByDateButton = document.querySelector(".sort-date");
 
 const todoList = [];
 class Todo {
@@ -66,6 +68,12 @@ addButton.addEventListener("click", () => {
   // using Todo without assigning it to a new obj
 });
 
+inputBox.addEventListener("keydown", (e) => {
+  if (e.key == "Enter") {
+    new Todo(inputBox.value, dateButton.value).addTask();
+  }
+});
+
 searchBox.addEventListener("input", (e) => {
   const searchQuery = e.target.value;
   todoList.forEach((item) => {
@@ -74,5 +82,33 @@ searchBox.addEventListener("input", (e) => {
     } else {
       item.element.style.display = "none";
     }
+  });
+});
+
+sortByNameButton.addEventListener("click", () => {
+  todoList.sort((a, b) => {
+    return a.element.innerText
+      .toLowerCase()
+      .localeCompare(b.element.innerText.toLowerCase());
+    // localecompare -> a ghabl az b
+  });
+
+  taskList.innerHTML = "";
+  todoList.forEach((item) => {
+    taskList.appendChild(item.element);
+  });
+});
+
+sortByDateButton.addEventListener("click", () => {
+  todoList.sort((a, b) => {
+    return (
+      new Date(a.element.querySelector("span").innerText) -
+      new Date(b.element.querySelector("span").innerText)
+    );
+  });
+
+  taskList.innerHTML = "";
+  todoList.forEach((item) => {
+    taskList.appendChild(item.element);
   });
 });
