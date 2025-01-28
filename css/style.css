@@ -182,10 +182,16 @@ button.delete-button {
   margin-left: auto;
 }
 
+.nav{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .search-container {
-  margin: 0 auto 4rem;
-  display: block;
-  width: 60%;
+  margin: 0 3.6rem 4rem;
+  display: inline-block;
+  width: 40%;
   min-width: 30rem;
   display: flex;
   align-items: center;
@@ -194,6 +200,10 @@ button.delete-button {
   background-color: #f1f1f1;
   border-radius: 0.7rem;
   padding: 1rem 1.5rem;
+}
+
+.sorts{
+  padding-right: 3rem;
 }
 
 .search-container i {
