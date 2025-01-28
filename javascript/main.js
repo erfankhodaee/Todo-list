@@ -2,39 +2,45 @@ const inputBox = document.querySelector(".input-box");
 const addButton = document.querySelector(".add-button");
 const dateButton = document.querySelector(".date-button");
 const taskList = document.querySelector(".task-list");
+const searchBox = document.querySelector(".search-box");
 
-addButton.addEventListener("click", (e) => {
-  addOrDelete();
-  inputBox.value = "";
-});
-
-inputBox.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    addOrDelete();
-    inputBox.value = "";
+class Todo {
+  constructor(title, date) {
+    this.title = title;
+    this.date = date;
   }
-  
-});
 
-function addOrDelete() {
-  if (inputBox.value.length < 3) {
-    alert("you need to atleast enter 3 characters!");
-    return;
+  checkTitle() {
+    if (this.title.length < 3) {
+      alert("Enter at least 3 characters!");
+      return false;
+    }
+    return true;
   }
-  const newTask = document.createElement("li");
-  newTask.className = "task-li";
-  const deleteBtn = document.createElement("button");
-  deleteBtn.classList = "delete-button btn";
-  deleteBtn.innerText = "Delete";
-  newTask.innerText = inputBox.value;
-  taskList.appendChild(newTask);
-  newTask.appendChild(deleteBtn);
-  deleteBtn.addEventListener("click", () => {
-    newTask.remove();
-  });
+
+  addTask() {
+    if (this.checkTitle()) {
+      this.li = document.createElement("li");
+      this.li.className = "task-li";
+      this.li.innerText = this.title;
+      taskList.appendChild(this.li);
+      // adding delete button to li
+      this.createDeleteButton();
+    }
+  }
+
+  createDeleteButton() {
+    this.deleteButton = document.createElement("button");
+    this.deleteButton.className = "btn delete-button";
+    this.deleteButton.textContent = "Delete";
+    this.deleteButton.addEventListener("click",()=>{
+      this.li.remove()
+    })
+    this.li.appendChild(this.deleteButton);
+  }
 }
 
-const searchBox = document.querySelector(".search-box");
-const searchLogo = document.querySelector(".search-logo");
-
-
+addButton.addEventListener("click", () => {
+  new Todo(inputBox.value, dateButton.value).addTask();
+  // using Todo without assigning it to a new obj
+});
