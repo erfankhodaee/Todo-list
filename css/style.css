@@ -245,7 +245,6 @@ input[type="date"]:focus {
   border-color: var(--yinmn-blue);
   box-shadow: 0 0 0 2px rgba(65, 90, 119, 0.2);
 }
-
-input[type="ckeckbox"] {
-  padding-right: 1rem;
+input[type="checkbox"] {
+  margin-right: 1rem;
 }
