@@ -21,10 +21,17 @@
   <body>
     <div class="container">
       <h1 class="container__heading">My Tasks</h1>
-      <div class="search-container">
-        <i class="fa-solid fa-magnifying-glass search-logo"></i>
-        <input type="search" class="search-box" />
+      <div class="nav">
+        <div class="search-container">
+          <i class="fa-solid fa-magnifying-glass search-logo"></i>
+          <input type="search" class="search-box" />
+        </div>
+        <div class="sorts">
+          <button class="btn sort-name">Sort By Name</button>
+          <button class="btn sort-date">Sort By Date</button>
+        </div>
       </div>
+
       <div class="input">
         <div class="input__container">
           <input
@@ -35,10 +42,10 @@
           />
           <span id="error-message" class="error-message"></span>
           <div class="date-container">
-            <input type="date"  class="date-button">
+            <input type="date" class="date-button" />
           </div>
         </div>
-        
+
         <div class="button-container">
           <button class="add-button btn">Add Task</button>
         </div>
