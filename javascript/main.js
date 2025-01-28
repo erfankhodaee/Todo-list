@@ -77,7 +77,7 @@ inputBox.addEventListener("keydown", (e) => {
 searchBox.addEventListener("input", (e) => {
   const searchQuery = e.target.value;
   todoList.forEach((item) => {
-    if (item.element.innerText.includes(searchQuery)) {
+    if (item.element.innerText.replace("Delete", "").toLowerCase().includes(searchQuery.toLowerCase())) {
       item.element.style.display = "";
     } else {
       item.element.style.display = "none";
