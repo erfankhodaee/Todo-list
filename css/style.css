@@ -182,7 +182,7 @@ button.delete-button {
   margin-left: auto;
 }
 
-.nav{
+.nav {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -202,7 +202,7 @@ button.delete-button {
   padding: 1rem 1.5rem;
 }
 
-.sorts{
+.sorts {
   padding-right: 3rem;
 }
 
@@ -247,4 +247,20 @@ input[type="date"]:focus {
 }
 input[type="checkbox"] {
   margin-right: 1rem;
+}
+
+.edit-button {
+  font-size: 1.2rem;
+  padding: 0.6rem 1rem;
+  width: auto;
+  height: auto;
+  margin-right: 0.5rem;
+}
+
+.editDelete {
+  margin-left: auto;
+}
+
+p {
+  font-size: 1.4rem;
 }
