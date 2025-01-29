@@ -7,16 +7,16 @@ const sortByNameButton = document.querySelector(".sort-name");
 const sortByDateButton = document.querySelector(".sort-date");
 
 const todoList = [];
+
 class Todo {
   constructor(title, date) {
     this.title = title;
-    this.date = document.createElement("span");
-    this.date.innerText = date;
+    this.dateText = date;
   }
 
   checkTitle() {
     if (this.title.length < 3) {
-      alert("enter at least 3 characters!");
+      alert("Enter at least 3 characters!");
       return false;
     }
     return true;
@@ -26,16 +26,49 @@ class Todo {
     if (this.checkTitle()) {
       this.li = document.createElement("li");
       this.li.className = "task-li";
-      this.li.innerText = this.title;
+
+      this.titleParagraph = document.createElement("p");
+      this.titleParagraph.innerText = this.title;
+      this.li.appendChild(this.titleParagraph);
+
+      this.dateSpan = document.createElement("span");
+      this.dateSpan.innerText = this.dateText;
+      this.dateSpan.className = "task-date";
+      this.li.appendChild(this.dateSpan);
+
+      this.editDelete = document.createElement("div");
+      this.editDelete.className = "editDelete";
+      this.li.appendChild(this.editDelete);
+
       inputBox.value = "";
       taskList.appendChild(this.li);
 
-      this.li.appendChild(this.date);
-      // adding delete button to li
+      this.createEditButton();
       this.createDeleteButton();
       this.createCheckBox();
+
       todoList.push({ element: this.li });
     }
+  }
+
+  createEditButton() {
+    this.editButton = document.createElement("button");
+    this.editButton.className = "btn edit-button";
+    this.editButton.textContent = "edit";
+    this.editButton.addEventListener("click", () => {
+      const newTitle = prompt(
+        "edit task title:",
+        this.titleParagraph.innerText
+      );
+      const newDate = prompt("Edit task date:", this.dateSpan.innerText);
+      if (newTitle && newTitle.length >= 3) {
+        this.titleParagraph.innerText = newTitle;
+      }
+      if (newDate) {
+        this.dateSpan.innerText = newDate;
+      }
+    });
+    this.editDelete.appendChild(this.editButton);
   }
 
   createDeleteButton() {
@@ -44,10 +77,14 @@ class Todo {
     this.deleteButton.textContent = "Delete";
     this.deleteButton.addEventListener("click", () => {
       this.li.remove();
-      todoList.splice(todoList.findIndex(item => item.element === this.li), 1);
+      todoList.splice(
+        todoList.findIndex((item) => item.element === this.li),
+        1
+      );
     });
-    this.li.appendChild(this.deleteButton);
+    this.editDelete.appendChild(this.deleteButton);
   }
+
   createCheckBox() {
     this.checkbox = document.createElement("input");
     this.checkbox.type = "checkbox";
@@ -55,18 +92,21 @@ class Todo {
     this.checkbox.addEventListener("change", () => {
       if (this.checkbox.checked) {
         this.li.style.color = "gray";
+        this.editButton.disabled = true;
+        this.editButton.style.color = "#999";
       } else {
         this.li.style.color = "black";
+        this.editButton.disabled = "";
+        this.editButton.style.color = "";
       }
     });
-    // putting checkbox before li title
     this.li.insertBefore(this.checkbox, this.li.firstChild);
   }
 }
 
 addButton.addEventListener("click", () => {
   new Todo(inputBox.value, dateButton.value).addTask();
-  // using Todo without assigning it to a new obj
+  dateButton.value = null;
 });
 
 inputBox.addEventListener("keydown", (e) => {
