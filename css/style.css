@@ -171,7 +171,7 @@ p {
   font-size: 1.4rem;
   padding: 1rem 2rem;
   margin: 1rem auto;
-  position: relative;
+  justify-content: space-between;
 }
 
 button.delete-button {
@@ -224,11 +224,6 @@ button.delete-button {
   margin: 0 1rem;
 }
 
-li span {
-  position: absolute;
-  left: 46%;
-}
-
 input[type="date"] {
   background-color: var(--platinum);
   padding: 0.8rem 1rem;
@@ -247,6 +242,7 @@ input[type="date"]:focus {
 }
 input[type="checkbox"] {
   margin-right: 1rem;
+  display: inline-block;
 }
 
 .edit-button {
@@ -257,10 +253,23 @@ input[type="checkbox"] {
   margin-right: 0.5rem;
 }
 
-.editDelete {
-  margin-left: auto;
-}
 
 p {
   font-size: 1.4rem;
+}
+
+.task-date:disabled{
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.titleParagraph:disabled {
+  color: #1a1a1a;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+}
+
+.titleParagraph {
+  color: #1a1a1a;
 }
