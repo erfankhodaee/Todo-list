@@ -26,15 +26,10 @@ class Todo {
     if (this.checkTitle()) {
       this.li = document.createElement("li");
       this.li.className = "task-li";
-
-      this.titleParagraph = document.createElement("p");
-      this.titleParagraph.innerText = this.title;
-      this.li.appendChild(this.titleParagraph);
-
-      this.dateSpan = document.createElement("span");
-      this.dateSpan.innerText = this.dateText;
-      this.dateSpan.className = "task-date";
-      this.li.appendChild(this.dateSpan);
+      this.infoContainer = document.createElement("div");
+      this.infoContainer.className = "info-container";
+      this.li.appendChild(this.infoContainer);
+      this.createTitleParagraph();
 
       this.editDelete = document.createElement("div");
       this.editDelete.className = "editDelete";
@@ -45,27 +40,38 @@ class Todo {
 
       this.createEditButton();
       this.createDeleteButton();
+      this.createTaskDate();
       this.createCheckBox();
 
       todoList.push({ element: this.li });
     }
   }
 
+  createTaskDate() {
+    this.taskDate = document.createElement("input");
+    this.taskDate.type = "date";
+    this.taskDate.value = this.dateText;
+    this.taskDate.className = "task-date";
+    this.li.insertBefore(this.taskDate, this.editDelete);
+  }
+
+  createTitleParagraph() {
+    this.titleParagraph = document.createElement("input");
+    this.titleParagraph.value = this.title;
+    this.titleParagraph.className = "titleParagraph";
+    this.titleParagraph.disabled = true;
+    this.infoContainer.appendChild(this.titleParagraph);
+  }
+
   createEditButton() {
     this.editButton = document.createElement("button");
     this.editButton.className = "btn edit-button";
-    this.editButton.textContent = "edit";
+    this.editButton.textContent = "Edit Name";
     this.editButton.addEventListener("click", () => {
-      const newTitle = prompt(
-        "edit task title:",
-        this.titleParagraph.innerText
-      );
-      const newDate = prompt("Edit task date:", this.dateSpan.innerText);
-      if (newTitle && newTitle.length >= 3) {
-        this.titleParagraph.innerText = newTitle;
-      }
-      if (newDate) {
-        this.dateSpan.innerText = newDate;
+      this.titleParagraph.disabled = !this.titleParagraph.disabled;
+      if (!this.titleParagraph.disabled) {
+        this.titleParagraph.focus();
+        this.titleParagraph.select();
       }
     });
     this.editDelete.appendChild(this.editButton);
@@ -91,16 +97,22 @@ class Todo {
     this.checkbox.className = "task-checkbox";
     this.checkbox.addEventListener("change", () => {
       if (this.checkbox.checked) {
+        this.titleParagraph.style.color = "gray";
+        this.taskDate.disabled = true;
+        this.taskDate.style.color = "gray";
         this.li.style.color = "gray";
         this.editButton.disabled = true;
         this.editButton.style.color = "#999";
       } else {
+        this.titleParagraph.style.color = "";
+        this.taskDate.disabled = "";
         this.li.style.color = "black";
+        this.taskDate.style.color = "";
         this.editButton.disabled = "";
         this.editButton.style.color = "";
       }
     });
-    this.li.insertBefore(this.checkbox, this.li.firstChild);
+    this.infoContainer.insertBefore(this.checkbox, this.titleParagraph);
   }
 }
 
@@ -133,10 +145,12 @@ searchBox.addEventListener("input", (e) => {
 
 sortByNameButton.addEventListener("click", () => {
   todoList.sort((a, b) => {
-    return a.element.innerText
-      .toLowerCase()
-      .localeCompare(b.element.innerText.toLowerCase());
-    // localecompare -> a ghabl az b
+    return a.element
+      .querySelector(".titleParagraph")
+      .value.toLowerCase()
+      .localeCompare(
+        b.element.querySelector(".titleParagraph").value.toLowerCase()
+      );
   });
 
   taskList.innerHTML = "";
@@ -148,8 +162,8 @@ sortByNameButton.addEventListener("click", () => {
 sortByDateButton.addEventListener("click", () => {
   todoList.sort((a, b) => {
     return (
-      new Date(a.element.querySelector("span").innerText) -
-      new Date(b.element.querySelector("span").innerText)
+      new Date(a.element.querySelector(".task-date").value) -
+      new Date(b.element.querySelector(".task-date").value)
     );
   });
 
