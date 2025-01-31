@@ -77,6 +77,16 @@ p {
 .input__container {
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.error-message {
+  position: absolute;
+  top: -2rem;
+  left: 1rem;
+  font-size: 1.2rem;
+  color: red;
+  display: none;
 }
 
 .input-box {
@@ -253,12 +263,11 @@ input[type="checkbox"] {
   margin-right: 0.5rem;
 }
 
-
 p {
   font-size: 1.4rem;
 }
 
-.task-date:disabled{
+.task-date:disabled {
   background-color: transparent;
   border-color: transparent;
 }
@@ -274,6 +283,6 @@ p {
   color: #1a1a1a;
 }
 
-.apply-button{
+.apply-button {
   margin-left: 1rem;
 }
