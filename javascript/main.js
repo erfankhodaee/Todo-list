@@ -68,13 +68,30 @@ class Todo {
     this.editButton.className = "btn edit-button";
     this.editButton.textContent = "Edit Name";
     this.editButton.addEventListener("click", () => {
-      this.titleParagraph.disabled = !this.titleParagraph.disabled;
-      if (!this.titleParagraph.disabled) {
-        this.titleParagraph.focus();
-        this.titleParagraph.select();
+      const existingApplyButton =
+        this.infoContainer.querySelector(".apply-button");
+      if (existingApplyButton) {
+        existingApplyButton.remove();
       }
+      this.createApplyButton();
+
+      this.titleParagraph.disabled = false;
+      this.titleParagraph.focus();
+      this.titleParagraph.select();
     });
     this.editDelete.appendChild(this.editButton);
+  }
+
+  createApplyButton() {
+    this.applyButton = document.createElement("button");
+    this.applyButton.className = "apply-button btn";
+    this.applyButton.innerText = "Apply";
+
+    this.applyButton.addEventListener("click", () => {
+      this.titleParagraph.disabled = true;
+      this.applyButton.remove();
+    });
+    this.infoContainer.appendChild(this.applyButton);
   }
 
   createDeleteButton() {
@@ -97,6 +114,10 @@ class Todo {
     this.checkbox.className = "task-checkbox";
     this.checkbox.addEventListener("change", () => {
       if (this.checkbox.checked) {
+        if (!this.titleParagraph.disabled) {
+          this.titleParagraph.disabled = true;
+          this.applyButton.remove();
+        }
         this.titleParagraph.style.color = "gray";
         this.taskDate.disabled = true;
         this.taskDate.style.color = "gray";
