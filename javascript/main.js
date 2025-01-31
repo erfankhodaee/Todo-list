@@ -5,6 +5,7 @@ const taskList = document.querySelector(".task-list");
 const searchBox = document.querySelector(".search-box");
 const sortByNameButton = document.querySelector(".sort-name");
 const sortByDateButton = document.querySelector(".sort-date");
+const errorMessage = document.querySelector(".error-message");
 
 const todoList = [];
 
@@ -16,10 +17,12 @@ class Todo {
 
   checkTitle() {
     if (this.title.length < 3) {
-      alert("Enter at least 3 characters!");
+      errorMessage.style.display = "block";
       return false;
+    } else {
+      errorMessage.style.display = "none";
+      return true;
     }
-    return true;
   }
 
   addTask() {
@@ -88,8 +91,12 @@ class Todo {
     this.applyButton.innerText = "Apply";
 
     this.applyButton.addEventListener("click", () => {
-      this.titleParagraph.disabled = true;
-      this.applyButton.remove();
+      if (this.titleParagraph.value.length < 3) {
+        return;
+      } else {
+        this.titleParagraph.disabled = true;
+        this.applyButton.remove();
+      }
     });
     this.infoContainer.appendChild(this.applyButton);
   }
