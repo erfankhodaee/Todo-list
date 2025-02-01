@@ -16,7 +16,7 @@
       src="https://kit.fontawesome.com/5aea15c056.js"
       crossorigin="anonymous"
     ></script>
-    <script src="javascript/main.js" defer></script>
+    <script src="src/main.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -40,7 +40,9 @@
             class="input-box"
             placeholder="Add your new task!"
           />
-          <span id="error-message" class="error-message">enter atleast 3 characters</span>
+          <span id="error-message" class="error-message"
+            >enter atleast 3 characters</span
+          >
           <div class="date-container">
             <input type="date" class="date-button" />
           </div>
@@ -52,6 +54,9 @@
       </div>
 
       <ul class="task-list"></ul>
+      <ul class="completed-task">
+        <h3 class="h3"></h3>
+      </ul>
     </div>
   </body>
 </html>
